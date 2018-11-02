@@ -1,0 +1,12 @@
+**/target
+**/pom.xml
+**/.idea
+*.iml
+.nrepl-port
+.lein-env
+crash.log
+.polylith/time.edn
+.polylith/git.edn
+
+\.lein-failures
+\.serverless

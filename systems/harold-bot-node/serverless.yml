@@ -1,0 +1,23 @@
+service: harold-bot-node
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  timeout: 5
+  memorySize: 512
+  logRetentionInDays: 30
+
+  region: eu-west-1
+
+package:
+  artifact: target/harold-bot-node-standalone.zip
+
+functions:
+  update-handler:
+    handler: index.bbg_harold_lambda_handler_node_core_SLASH_update_handler
+    tags:
+      VERSION: 0.1
+    events:
+      - http:
+          path: update
+          method: post

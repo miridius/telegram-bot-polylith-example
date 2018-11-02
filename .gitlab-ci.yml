@@ -1,0 +1,33 @@
+build:
+  stage: build
+  image: clojure:lein-alpine
+  script:
+  # Install git (needed by polylith) and node (needed by cljs-lambda)
+  - apk -Uv add git nodejs npm
+  # Build the app (also runs tests)
+  - lein polylith build -success
+  artifacts:
+    name: "${CI_PROJECT_NAME}-${CI_COMMIT_REF_SLUG}-${CI_COMMIT_SHA}"
+    paths:
+    - systems/*/target/*-standalone.jar
+    - systems/*/target/*-standalone.zip
+
+deploy-jvm:
+  stage: deploy
+  image: node:alpine
+  script:
+  # Install serverless
+  - npm install -g serverless
+  # Deploy to AWS Lambda
+  - cd systems/harold-bot-jvm
+  - serverless deploy -v
+
+deploy-node:
+  stage: deploy
+  image: node:alpine
+  script:
+  # Install serverless
+  - npm install -g serverless
+  # Deploy to AWS Lambda
+  - cd systems/harold-bot-node
+  - serverless deploy -v

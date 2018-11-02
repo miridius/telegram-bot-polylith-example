@@ -1,0 +1,1 @@
+../../../../bases/lambda-handler-jvm/project.clj

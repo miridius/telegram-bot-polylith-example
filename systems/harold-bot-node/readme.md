@@ -1,0 +1,3 @@
+# harold-bot-node system
+
+add documentation here...
